@@ -1,11 +1,8 @@
-import app from './app';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
 
-const startApp = async () => {
-  const header = document.querySelector('[data-app-name]');
-  if (!header) return;
+ReactDOM.render(<App />, document.getElementById('root'));
 
-  const programName = await app();
-  header.textContent = programName;
-};
-
-document.addEventListener('DOMContentLoaded', startApp);
+//unregister in developmen
+serviceWorker.unregister();
