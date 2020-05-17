@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from "react-router-dom";
 import "./Login.css";
 
 export default class Login extends Component{
@@ -17,10 +18,10 @@ export default class Login extends Component{
                     <h3>Login</h3>
                     <form>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Email *" value="" />
+                            <input type="text" class="form-control" placeholder="Your Email" value="" />
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Your Password *" value="" />
+                            <input type="password" class="form-control" placeholder="Your Password" value="" />
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btnSubmit" value="Login" />
@@ -33,10 +34,9 @@ export default class Login extends Component{
                         </div>
                         <br/>
                         <div class="form-group">
-                        <button class="btn btn-reg btn-block">Register</button>
+                        <Link className="btn btn-reg btn-block" to={`/register`} >Register</Link>
                        </div>
-                    </form>
-                    
+                    </form>                   
                 </div>
             </div>
         </div>
