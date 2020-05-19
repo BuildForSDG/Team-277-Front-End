@@ -11,8 +11,8 @@ export default class Profile extends Component{
 
     render(){
         return(
-            <div className="">
-               <h1 className="">Profile</h1>
+            <div className="col text-center">
+               <h3 className="">Profile</h3>
             </div>
         )
     }

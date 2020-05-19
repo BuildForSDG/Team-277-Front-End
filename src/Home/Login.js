@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import cookies from 'js-cookie';
 import "./css/login.css";
 
 export default class Login extends Component{
@@ -14,9 +15,14 @@ export default class Login extends Component{
     handleForm = (e) => {
         e.preventDefault();
         const data = {email:this.state.email, password:this.state.password}
+
         axios.post("http://localhost:8000/api/auth/login", data)
-        .then(res => console.log(res))
-        .catch(e => this.setState({ errors: e.response.data }));
+        .then(res => {
+            cookies.set("token",res.data.access_token);
+            cookies.set("token",res.data.user);
+            this.props.history.push('/profile');
+        })
+        .catch(e => this.setState({ errors: e.response.errors }));
 
         //this.props.history.push('/profile');
     }
@@ -47,10 +53,10 @@ export default class Login extends Component{
               <form onSubmit={this.handleForm}>
                   {error.errors? <div className="alert alert-danger"> {error.errors} </div> :''}
                   <div className="form-group">
-                      <input type="email" className="form-control" name="email" placeholder="Your Email" onChange={this.handleInput}/>
+                      <input type="email" className="form-control" name="email" placeholder="Your Email" onChange={e =>this.setState({email: e.target.value})}/>
                   </div>
                   <div className="form-group">
-                      <input type="password" className="form-control" name="password" placeholder="Your Password" onChange={this.handleInput} />
+                      <input type="password" className="form-control" name="password" placeholder="Your Password" onChange={e =>this.setState({password: e.target.value})} />
                   </div>
                   <div className="form-group">
                       <input type="submit" className="btnSubmit" style={{backgroundColor:'#000',color:'#fff'}} value="Login" />
