@@ -9,7 +9,7 @@ export default class Login extends Component{
     constructor(props){
         super(props);
 
-        this.state = {email:'', password:'', errors:{}};
+        this.state = {email:'', password:'', errors:''};
     }
 
     handleForm = (e) => {
@@ -22,7 +22,7 @@ export default class Login extends Component{
             cookies.set("token",res.data.user);
             this.props.history.push('/profile');
         })
-        .catch(e => this.setState({ errors: e.response.errors }));
+        .catch(e => this.setState({ errors: e.response.data.errors }));
 
         //this.props.history.push('/profile');
     }
@@ -51,7 +51,7 @@ export default class Login extends Component{
           <div className="col-md-6 login-form-2">
               <h3>Login</h3>
               <form onSubmit={this.handleForm}>
-                  {error.errors? <div className="alert alert-danger"> {error.errors} </div> :''}
+                  {error? <div className="alert alert-danger"> {error} </div> :''}
                   <div className="form-group">
                       <input type="email" className="form-control" name="email" placeholder="Your Email" onChange={e =>this.setState({email: e.target.value})}/>
                   </div>
